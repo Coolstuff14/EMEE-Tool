@@ -78657,9 +78657,5 @@
          "_name": "Antonucci_Test_wAPS",
          "_uniqueId": "site-0"
       }
-   },
-   "_xmlns": "http://importexport.cisco.com/1.0",
-   "_xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
-   "_xsi:schemaLocation": "http://importexport.cisco.com/1.0 Untitled1.xsd",
-   "_distUnits": "FEET"
+   }
 }

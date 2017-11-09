@@ -1,12 +1,17 @@
-//return an array of objects according to key, value, or key and value matching
 $( document ).ready(function() {
 
 function madLyrics(data){
-  $.each(data, function(key, item){
-    console.log(item.maps);
-  });
+  res1 = JSON.stringify(jsonPath(data, "$..CoordinatePoint"));
+  //console.log(res1);
+  //$("#output").html(res1);
+  $.each(res1, function(key, item){
+     $("#output").html(item._xCoordinate);
+   });
 }
 
+$( "#btnLoad" ).click(function() {
+  onOpenChange();
+});
 
 function loadFile() {
   var input, file, fr;
@@ -28,14 +33,31 @@ function loadFile() {
   }
   else {
     file = input.files[0];
-    fr = new FileReader();
-    fr.onload = receivedText;
-    fr.readAsText(file);
-  }
+    jsn = $.getJSON(file);
+    $("#output").html();
+    madLyrics(jsn);
+    // fr = new FileReader();
+    // fr.onload = receivedText;
+    // fr.readAsText(file);
+  }}
 
-  function receivedText(e) {
-    lines = e.target.result;
-    madLyrics(lines);
-  }
+function onOpenChange() {
+    var filePath = $("#fileinput").val();
+    var startIndex = filePath.indexOf('\\') >= 0 ? filePath.lastIndexOf('\\') : filePath.lastIndexOf('/');
+    var filename = filePath.substring(startIndex);
+    if(filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+        filename = filename.substring(1);
+    }
+
+    $.ajax({
+        url: filename,
+        success: onOpenLoad
+    });
+}
+
+function onOpenLoad(fileContent) {
+    var data = JSON.parse(JSON.stringify(fileContent));
+    madLyrics(data);
+    // do something with the data
 }
 });
