@@ -1,17 +1,36 @@
 $( document ).ready(function() {
 
 function madLyrics(data){
-  res1 = JSON.stringify(jsonPath(data, "$..CoordinatePoint"));
+  res1 = jsonPath(data, "$..Floor[1]..CoordinatePoint");
   //console.log(res1);
-  //$("#output").html(res1);
+  //$("#output").html(res1._xCoordinate);
+  //var w = window.open();
+  var np = $("#newhtml").html();
+  var $np = $('<div>').append($.parseHTML(np));
+  //$(w.document.body).html(np);
+  var multW = 9 ;
+  var multH = 10 ;
+
   $.each(res1, function(key, item){
-     $("#output").html(item._xCoordinate);
+      var x1 = item[0]._xCoordinate*multW
+      var x2 = item[1]._xCoordinate*multW
+      var y1 = item[0]._yCoordinate*multH
+      var y2 = item[1]._yCoordinate*multH
+      $("#output").line(x1,y1,x2,y2,{zindex:1001, color:'red'});
    });
+
+   var lines = $("#output").html();
+   $np.find("#drawhere").append(lines);
+
+   var out = "text/json;charset=utf-8," + encodeURIComponent($np.html());
+
+   $('<a href="data:' + out + '" download="data.html">download JSON</a>').appendTo('#output');
 }
 
 $( "#btnLoad" ).click(function() {
   onOpenChange();
 });
+
 
 function loadFile() {
   var input, file, fr;

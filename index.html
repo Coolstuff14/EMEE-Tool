@@ -9,9 +9,15 @@
   <meta name="author" content="SitePoint">
   <script src="def.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="jquery.line.js"></script>
   <script src="jsonpath-0.8.0.js"></script>
   <script src="main.js"></script>
 
+<style>
+#output{
+  /*display: none;*/
+}
+</style>
 
 </head>
 
@@ -25,9 +31,30 @@
   </fieldset>
 </form>
 
-<p id='output'>
+<div id='output'>
+</div>
 
-</p>
+<script id="newhtml" type="text/plain">
+<html lang="en">
+<head>
+<style>
+body, html {
+  display:block;
+  background: url("map1big.jpg") 0 0 no-repeat;
+  background-color: coral;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+</style>
+<title>image</title>
+</head>
+<body>
+<div id="drawhere">
+</div>
+</body>
+</html>
+</script>
 
 
 
